@@ -28,10 +28,10 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
   //Uses fetch to get content from servlet and puts it in hello container
-async function getHello() {
+async function getComments() {
   const response = await fetch('/data');
   const quote = await response.json();
-  document.getElementById('comment-containerOne').innerText = quote.commentOne;
-  document.getElementById('comment-containerTwo').innerText = quote.commentTwo;
-  document.getElementById('comment-containerThree').innerText = quote.commentThree;
+  document.getElementById('comment-containerOne').innerText = quote.comment1;
+  document.getElementById('comment-containerTwo').innerText = quote.comment2;
+  document.getElementById('comment-containerThree').innerText = quote.comment3;
 }

@@ -25,23 +25,34 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private ArrayList<String> comments_ = new ArrayList<String>();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<String> comments = new ArrayList<String>();
-    comments.add("This page looks great");
-    comments.add("nice job");
-    comments.add("perfect");
     String json = "{";
-    json += "\"commentOne\": ";
-    json += "\"" + comments.get(0) + "\"";
-    json += ", ";
-    json += "\"commentTwo\": ";
-    json += "\"" + comments.get(1) + "\"";      
-    json += ", ";
-    json += "\"commentThree\": ";
-    json += "\"" + comments.get(2) + "\""; 
-    json += "}";
+    for(int x=0; x<comments_.size(); x++){
+      json += "\"comment"+(x+1)+"\": ";
+      json += "\"" + comments_.get(x) + "\"";
+      if((comments_.size()-x)!=1){
+        json += ", ";}
+    }
+      json += "}";
     response.setContentType("application/json;");
     response.getWriter().println(json);
+  }
+
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String text = getParameter(request, "text-input", "default");
+    comments_.add(text);
+    response.setContentType("text/html;");
+    response.getWriter().println(comments_);
+    response.sendRedirect("/index.html");
+  }
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 }

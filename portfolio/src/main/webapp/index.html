@@ -69,7 +69,13 @@
       <img src="images/fluffy.jpg" alt="Cat" style="width:596px;height:400px;">
       <img src="images/puffy.jpg" alt="Cat" style="width:596px;height:400px;">
     </div>
-    <button onclick="getHello()">Fetch a greeting</button>
+    <form action="/data" method="POST">
+
+      <p>Add a Comment:</p>
+      <textarea name="text-input">Comment</textarea>
+      <input type="submit" />
+    </form>
+    <button onclick="getComments()">Load Comments</button>
     <div id="comment-containerOne"></div>
     <div id="comment-containerTwo"></div>
     <div id="comment-containerThree"></div>
